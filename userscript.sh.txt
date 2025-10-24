@@ -1,0 +1,24 @@
+#!/bin/bash
+
+
+USERNAMES=("paguilar4" "eleachman04" "alippert1" "blewis8" "tlongwell" "dpeterson8" "rrutherford3" "dsergio")
+
+for USER in "${USERNAMES[@]}"; do
+    PASSWORD=$(echo -n "$USER" | md5sum | awk '{print $1}' | cut -c1-8)
+    
+    if id "$USER" &>/dev/null; then
+        echo "User $USER already exists, skipping..."
+        continue
+    fi
+
+    # Create user with home directory
+    sudo useradd -m "$USER"
+    
+    # Set the password
+    echo "$USER:$PASSWORD" | sudo chpasswd
+    
+    # Add to sudo group (admin rights)
+    sudo usermod -aG sudo "$USER"
+    
+    echo "Created user: $USER  |  Password: $PASSWORD"
+done
