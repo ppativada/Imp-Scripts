@@ -1,0 +1,20 @@
+# cleaning disk using diskpart
+
+- open cmd and type: diskpart
+
+- list all disks: list disk
+
+- to select: select disk
+
+- $clean
+
+- $create partition primary
+
+- $format fs=exfat quick
+
+- $assign
+
+
+# to clear disks read-only
+
+- $attributes disk clear read-only
