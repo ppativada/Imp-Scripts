@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-USERNAMES=("paguilar4" "eleachman04" "alippert1" "blewis8" "tlongwell" "dpeterson8" "rrutherford3" "dsergio")
+USERNAMES=("x" "xyz" "dfg")
 
 for USER in "${USERNAMES[@]}"; do
     PASSWORD=$(echo -n "$USER" | md5sum | awk '{print $1}' | cut -c1-8)
@@ -22,3 +22,4 @@ for USER in "${USERNAMES[@]}"; do
     
     echo "Created user: $USER  |  Password: $PASSWORD"
 done
+
