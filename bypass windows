@@ -1,0 +1,4 @@
+# To by-pass windows activation while installing windows 11:
+
+- to open command prompt: Fn+Shift+F10
+- in the cmd type: start ms-cxh:localonly
