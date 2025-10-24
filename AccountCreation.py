@@ -1,5 +1,6 @@
 import hashlib
 import subprocess
+import pandas as pd
 
 def create_user_credentials(user_id):
     username = user_id
@@ -18,18 +19,17 @@ def create_user_account(username, password):
 
 def process_user_ids(file_path):
     try:
-        with open(file_path, "r") as file:
-            user_ids = file.readlines()
-        for user_id in user_ids:
-            user_id = user_id.strip()
-            if user_id:
+        df = pd.read_csv(file_path)
+        for user_id in df['SIS Login ID']:
+            if pd.notna(user_id):
+                user_id = str(user_id).strip()
                 credentials = create_user_credentials(user_id)
                 create_user_account(credentials["username"], credentials["password"])
     except FileNotFoundError:
-        print(f"Error: file not found")
+        print("Error: file not found")
     except Exception as e:
-        print(f"an unexpected error: {e}")
-    
+        print(f"An unexpected error occurred: {e}")
+
 if __name__ == "__main__":
-    file_path = "file path to be added"
+    file_path = "/home/adminuser/test/data.csv"
     process_user_ids(file_path)
